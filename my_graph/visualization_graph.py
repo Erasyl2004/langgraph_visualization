@@ -30,9 +30,9 @@ workflow.add_conditional_edges(
     "MoodClassifier",
     determine_mood,
     {
-        "MoodHappyExecuter": "MoodHappyExecuter",
-        "MoodAngryExecuter": "MoodAngryExecuter",
-        "MoodUncertainExecuter": "MoodUncertainExecuter",
+        "happy": "MoodHappyExecuter",
+        "angry": "MoodAngryExecuter",
+        "uncertain": "MoodUncertainExecuter",
     },
 )
 

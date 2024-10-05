@@ -37,14 +37,7 @@ async def mood_sad_executer_node(state: MoodClassifierState) -> MoodClassifierSt
     return {"mood_based_description": sad_based_description}
 
 async def determine_mood(state: MoodClassifierState) -> str:
-    if isinstance(state["mood"], str) and state["mood"] == "happy":
-        return "MoodHappyExecuter"
-    elif isinstance(state["mood"], str) and state["mood"] == "angry":
-        return "MoodAngryExecuter"
-    elif isinstance(state["mood"], str) and state["mood"] == "uncertain":
-        return "MoodUncertainExecuter"
-    else:
-        raise ValueError("Invalid state. Uncorrect mood state!!!")
+    return state["mood"]
 
 async def end_and_return_state(state: MoodClassifierState):
     return state
