@@ -1,0 +1,9 @@
+langgraph
+langchain_community
+langchain_openai
+python-dotenv
+langfuse
+pydantic
+langchain
+langchain_core
+IPython
