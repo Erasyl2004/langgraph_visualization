@@ -28,7 +28,7 @@ class MoodClassifierResponse(BaseModel):
         description="The emotional state determined from the input message. Must be one of: 'happy', 'angry', or 'uncertain'."
     )
 
-async def mood_classifier_prompt_executer_node(state: MoodClassifierState):
+async def mood_classifier_prompt_executer_node(state: MoodClassifierState) -> MoodClassifierState:
     langfuse_prompt = langfuse.get_prompt("mood_classifier_prompt")
     langchain_prompt = ChatPromptTemplate.from_template(langfuse_prompt.get_langchain_prompt())
 
