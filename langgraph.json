@@ -1,8 +1,11 @@
 {
-    "dependencies": ["./my_graph"],
-    "graphs": {
-      "agent": "./my_graph/visualization_graph.py:graph"
-    },
-    "env": ".env"
-  }
-  
+  "dockerfile_lines": [],
+  "graphs": {
+    "agent": "./my_graph/visualization_graph.py:graph"
+  },
+  "env": ".env",
+  "python_version": "3.11",
+  "dependencies": [
+    "./my_graph"
+  ]
+}

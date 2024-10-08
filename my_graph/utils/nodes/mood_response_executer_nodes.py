@@ -22,8 +22,9 @@ async def mood_angry_executer_node(state: MoodClassifierState) -> MoodClassifier
 
 async def mood_uncertain_executer_node(state: MoodClassifierState) -> MoodClassifierState:
     uncertain_based_description = """
-    The person is unsure or experiencing doubt.
-    Their message may be vague, contain questions, hesitations, or indicate uncertainty in their thoughts or actions.
+    The mood is classified as "uncertain" because the message lacks enough clear emotional cues to determine a specific state.
+    This can occur when the message is neutral, ambiguous, or does not provide sufficient information for a classification as "happy," "angry," or another defined mood.
+    Messages in this category may express uncertainty, vagueness, or hesitancy, often containing questions or neutral statements.
     """
 
     return {"mood_based_description": uncertain_based_description}

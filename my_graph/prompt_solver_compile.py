@@ -1,12 +1,10 @@
 import os
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
 from typing import Literal
 from langchain_core.prompts import ChatPromptTemplate
-from pydantic import BaseModel, Field
 from langgraph.graph import END, START, StateGraph
 from my_graph.utils.state import MoodClassifierState
-from my_graph.utils.nodes.prompt_executer_node import mood_classifier_prompt_executer_node
+from my_graph.utils.nodes.prompt_executer_nodes import mood_classifier_prompt_executer_node, message_transformer_prompt_executer_node
 from my_graph.utils.nodes.mood_response_executer_nodes import (
     mood_happy_executer_node,
     mood_angry_executer_node,
@@ -32,6 +30,7 @@ langfuse_callback_handler = CallbackHandler()
 
 nodes = {
     "MoodClassifier": mood_classifier_prompt_executer_node,
+    "MessageTransformer": message_transformer_prompt_executer_node,
     "MoodHappyExecuter": mood_happy_executer_node,
     "MoodAngryExecuter": mood_angry_executer_node,
     "MoodUncertainExecuter": mood_uncertain_executer_node,
@@ -89,13 +88,3 @@ def build_the_graph_with_solver_prompt():
             workflow.add_node(node_name, nodes[node_name])
 
     return workflow
-
-
-
-
-
-
-
-
-
-# на вход дается какое то рандомное сообщение задача промпта определить на его основе при каком настроений оно было написанно на выходе может быть только три варианта ответа: happy, angry, sad, uncertain. У промпта будет только один input variable: message

@@ -44,6 +44,27 @@ async def mood_classifier_prompt_executer_node(state: MoodClassifierState) -> Mo
 
     return {"mood": response.mood}
 
+class MessageTransformerResponse(BaseModel):
+    transformed_message: str = Field(
+        description="The modified message adjusted to fit one of the specific moods: 'happy', 'angry', or 'sad'."
+    )
+
+async def message_transformer_prompt_executer_node(state: MoodClassifierState) -> MoodClassifierState:
+    langfuse_prompt = langfuse.get_prompt("message_transformer_prompt")
+    langchain_prompt = ChatPromptTemplate.from_template(langfuse_prompt.get_langchain_prompt())
+
+    model = ChatOpenAI(
+        model=langfuse_prompt.config["model"],
+        temperature=langfuse_prompt.config["temperature"],
+    ).with_structured_output(MessageTransformerResponse)
+
+    chain = langchain_prompt | model
+    response = chain.invoke(input={"message": state["message"]}, config={"callbacks": [langfuse_callback_handler]})
+
+    logger.info(f"prompt response:\n{response}")
+
+    return {"message": response.transformed_message}
+
 
 
 
